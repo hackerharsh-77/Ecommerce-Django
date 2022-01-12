@@ -15,29 +15,37 @@
         display: inline-block;
         margin-left: -4px;
       }
-
       .col-md-3 {
-        width: 100%;
+        width: 25%;
         height: auto;
       }
       body .carousel-control-indicator li {
         background-color: blue;
       }
-      body .carousel-control-prev-icon body .carousel-control-next-icon {
+      body .carousel-control-prev-icon body .carousel-control-next-icon{
         background-color: blue;
       }
       body .carousel-indicators{
         bottom:0; 
+        margin-bottom: -28rem;
+      }
+      .carousel-indicators [data-bs-target] {
+        background-color: grey;
       }
       .carousel-indicators .active{
         background-color: blue;
+        margin-bottom: -28rem;
         }
-
+      .carousel-control-next{
+        bottom:81px; 
+      }
+      .carousel-control-prev{
+        bottom:81px;
+      }
       body .no-padding {
         padding-left: 0;
         padding-right: 0;
       }
-    
     </style>
   </head>
   <body>
@@ -77,6 +85,8 @@
         </div>
       </div>
     </nav>
+    <!--navbar ends-->
+
     <div class="container">
     <div id="demo" class="carousel slide" data-bs-ride="carousel">
     <ul class="carousel-indicators">
@@ -226,6 +236,7 @@
       </div>
     </div>
   </div>
+</div>
 
   <!--left and right controls for the slide-->
   <a class="carousel-control-prev" href="#demo" data-bs-slide="prev">
@@ -234,7 +245,6 @@
   <a class="carousel-control-next" href="#demo" data-slide="prev">
     <span class="carousel-control-next-icon"></span>
   </a>
-</div>
 
 
   <!--<a href = "{% static 'shop/static_file.txt' %}">Click me</a> -->
