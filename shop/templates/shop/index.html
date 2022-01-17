@@ -49,23 +49,21 @@
     {% load static %}
     <!--navbar ends-->
     {% block body %} 
-
+    {% for product, range, nSlides in allProds %}
     <div class="container">
       <!--SlideShow stars here-->
-
-    <h2>Electronic Gadgets</h2>
-    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <h2>{{product.0.category}}</h2>
+    <div id="demo{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel">
     <ul class="carousel-indicators">
-      <li data-bs-target="#demo" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#demo{{forloop.counter}}" data-bs-slide-to="0" class="active"></li>
 
-      {% for i in range %}
-      <li data-bs-target="#demo" data-bs-slide-to="{{i}}"></li>
-      {% endfor %}
+    {% for i in range %}
+      <li data-bs-target="#demo{{forloop.parentloop.counter}}" data-bs-slide-to="{{i}}"></li>
+    {% endfor %}
     </ul>
 
-    
-    <div class="container caraousel-inner no-padding">
 
+    <div class="container caraousel-inner no-padding">
       <div class="carousel-item active">
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
@@ -93,21 +91,28 @@
         {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
         </div><div class="carousel-item ">
         {% endif %}
-
         {% endfor %}
-      </div>
+</div>
  
 </div>
 </div>
   <!--left and right controls for the slide-->
-  <a class="carousel-control-prev" href="#demo" data-bs-slide="prev">
+  <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </a>
-  <a class="carousel-control-next" href="#demo" data-bs-slide="next">
+  <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </a>
-  
-</div> 
-  {% endblock%}
+</div>  
+<br> <br>
+<br><br><br> <br>
+<br><br><br> <br>
+<br><br><br> <br>
+<br><br><br> <br>
+<br><br><br> <br>
+<br><br>
+{% endfor %}
+
+{% endblock%}
   
 
