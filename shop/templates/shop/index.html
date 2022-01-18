@@ -23,7 +23,7 @@
       }
       body .carousel-indicators{
         bottom:0; 
-        margin-bottom: -28rem;
+        margin-bottom: -2rem;
       }
       .carousel-indicators [data-bs-target] {
         background-color: grey;
@@ -53,7 +53,8 @@
     <div class="container">
       <!--SlideShow stars here-->
     <h2>{{product.0.category}}</h2>
-    <div id="demo{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel">
+    <div class="row">
+    <div id="demo{{forloop.counter}}" class=" col carousel slide my-3" data-bs-ride="carousel">
     <ul class="carousel-indicators">
       <li data-bs-target="#demo{{forloop.counter}}" data-bs-slide-to="0" class="active"></li>
 
@@ -65,18 +66,9 @@
 
     <div class="container caraousel-inner no-padding">
       <div class="carousel-item active">
-        <div class="col-xs-3 col-sm-3 col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img src='/media/{{product.0.image}}' class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{product.0.product_name}}</h5>
-              <p class="card-text">{{product.0.desc}}</p>
-              <a href="#" class="btn btn-primary">Add to Card</a>
-            </div>
-          </div>
-        </div>
         
-        {% for i in product|slice:"1:"  %}
+        
+        {% for i in product  %}
 
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
@@ -84,11 +76,11 @@
             <div class="card-body">
               <h5 class="card-title">{{i.product_name}}</h5>
               <p class="card-text">{{i.desc}}</p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
+              <button id="pr{{i.product_id}}" class="btn btn-primary cart">Add to Cart</button>
             </div>
           </div>
         </div>
-        {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
         </div><div class="carousel-item ">
         {% endif %}
         {% endfor %}
@@ -104,15 +96,41 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>  
-<br> <br>
-<br><br><br> <br>
-<br><br><br> <br>
-<br><br><br> <br>
-<br><br><br> <br>
-<br><br><br> <br>
-<br><br>
+
+</div>
 {% endfor %}
 
+
 {% endblock%}
+{% block js %} 
+  <script>
+    console.log("hello there")
+    if(localStorage.getItem('cart') == null)
+{
+var cart={};
+}
+else{
+  cart = JSON.parse(JSON.stringify(localStorage.getItem('cart')));
+  document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+$('.cart').click(function(){
+
+  console.log('clicked');
+  var idstr= this.id.toString();
+  console.log(idstr);
+  if(cart[idstr]!= undefined) {
+    cart[idstr] = cart[idstr]+1;
+    }
+    else{
+   
+    cart[idstr] = 1;
+    }
+    console.log(cart);   
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  });
+  </script>
+  {% endblock%}
+
   
 
